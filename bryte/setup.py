@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="bryte",
-    version="0.0.6",
+    version="0.0.7",
     description="Python library of tools for enhancing your development, along with common shortcuts for speeding up your development",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -29,7 +29,7 @@ setup(
     ],
     packages=["bryte"],
     include_package_data=True,
-    install_requires=[],
+    install_requires=["os", "json", "requests", "subprocess"],
     entry_points={
         "console_scripts": [
             "brytepython=bryte.__main__:main",
