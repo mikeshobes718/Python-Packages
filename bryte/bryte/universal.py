@@ -1,5 +1,129 @@
 # universal.py
 
+"""
+universal.py: This module is used for Developmental Engineering purposes.
+"""
+
+import os
+import json
+import requests
+import subprocess
+
 weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat']
 
 whoami = "Mike Shobes"
+
+headers = {'Content-type':'application/json'}
+
+# USE IN OTHER PROGRAMS TO DOWNLOAD MODULE
+# module_file_name = "temp.py"
+# module_url = "ENTER GIT RAW URL LINK HERE"
+# proc_output = subprocess.Popen(["wget", "-o", "/dev/null", "-O", module_file_name, module_url], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+# out, err = proc_output.communicate()
+
+# USE IN OTHER PROGRAMS TO INSTALL MODULE
+# module_name = module_file_name
+# log_update = subprocess.Popen(["sudo", "pip", "install", module_name], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+# status, err = log_update.communicate()
+
+def print_user_input(this_input):
+    return (u'You\'re input is "'
+            u'{}"').format(this_input)
+
+def get_env_creds(argument):
+    switch = {
+        "Test" : {"env_url" : "",
+                 "key" : "",
+                 "secret" : "",
+                    },
+        "Dev" : {"env_url" : "",
+                "key" : "",
+                "secret" : "",
+                    },
+        "Prod" : {"env_url" : "",
+                "key" : "",
+                "secret" : "",
+                    },
+    }
+    data = switch.get(argument, "ERROR: Invalid Environment!")
+
+    env_url = data['env_url']
+    key = data['key']
+    secret = data['secret']
+
+    return env_url, key, secret
+
+values = get_env_creds('Test')
+env_url = values[0]
+key = values[1]
+secret = values[2]
+
+def get():
+    print("BTMOS")
+
+def printer(msg):
+    print(msg)
+
+class UrlRequest:
+    def __init__(self, url, key, secret):
+        self.url = url
+        self.key = key
+        self.secret = secret
+
+        response = requests.get(url, auth=(key, secret), headers=headers, verify=False)
+        binary = response.content
+        output = json.loads(binary)
+        json_string = json.dumps(output, indent=4)
+
+        self.response = response
+        self.output = output
+        self.json_string = json_string
+
+# env_request = UrlRequest(env_url, key, secret)
+# print(env_request.output)
+# print(env_request.json_string)
+
+class file_exist:
+    def __init__(self, this_file):
+        status = os.path.exists(this_file)
+        if(status == True):
+            if(os.path.isdir(this_file)):
+                file_type = 'directory'
+                # print(file_type)
+            elif(os.path.isfile(this_file)):  
+                file_type = 'file'
+                # print(file_type)
+            else:
+                print("It is a special file (socket, FIFO, device file, etc.)" )
+            status = 'exist'
+        else:
+            file_type = status
+            status = status
+
+        self.file_type = file_type
+        self.status = status
+
+# binary_file_results = file_exist(terraform_binary_path)
+# state_file_results = file_exist(terraform_state_file_path)
+
+# if(state_file_results.file_type == 'file' and state_file_results.status == 'exist'):
+#     os.remove(terraform_state_file_path)
+
+# if(binary_file_results.file_type == 'file' and binary_file_results.status == 'exist'):
+#     # print(binary_file_results.file_type)
+#     # print(binary_file_results.status)
+
+#     projects_url = ""
+#     projects_request = UrlRequest(projects_url, key, secret)
+
+#     # print(projects_request.json_string)
+#     output = projects_request.output
+
+#     for counter in range(len(output['data'])):
+#         # print(counter)
+#         env_name = output['data'][counter]['name']
+#         env_id = output['data'][counter]['id']
+#         print("ENV Name: " + env_name + " / " + "ENV ID: " + env_id)
+#         print("")
+#             # if(output['data'][counter]['name']) == instance_name:
+#             #     env_id = output['data'][counter]['id']
