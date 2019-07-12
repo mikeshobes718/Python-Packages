@@ -14,7 +14,7 @@ setup(
     description="Python library of tools for enhancing your development, along with common shortcuts for speeding up your development",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/mikeshobes718/Python-Packages",
+    url="https://github.com/mikeshobes718/Python-Packages/tree/master/bryte",
     author="Mike Shobes",
     author_email="mikeshobes718@yahoo.com",
     license="MIT",
