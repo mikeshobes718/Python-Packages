@@ -131,7 +131,7 @@ class UrlRequest:
 
 # Get everything after last character occurrence
 def lasttrim(character, trim_this):
-    """Get all contents after specified character.\n
+    """Get all contents after specified character\n
     ex: lasttrim('.', string)
     """
     trimmed = trim_this[trim_this.rindex(character)+1:]
@@ -147,7 +147,7 @@ class findtrim:
         self.trimmed = trimmed
 
 def filestatus(this_file):
-    """Check if file exists, and get the file type."""
+    """Check if file exists, and get the file type"""
     status = os.path.exists(this_file)
     if(status == True):
         if(os.path.isdir(this_file)):
@@ -191,7 +191,7 @@ def getfilecontent(file):
     return file_in_list_to_string_format
 
 def getoriginalfilecontentnoprefix(file, prefix):
-    """Get entire file contents in original/list format.\n
+    """Get entire file contents in original/list format\n
     In Development!
     """
     with open(file) as f:
@@ -225,7 +225,7 @@ def getfileline(file, linenumber):
     return line
 
 def txt2dslist(file):
-    """Convert txt file to datastructure in list format."""
+    """Convert txt file to datastructure in list format"""
     content = getoriginalfilecontent(file)
     data = []
     for line in content:
@@ -235,7 +235,7 @@ def txt2dslist(file):
     return data
         
 def txt2dslistnoprefix(file, prefix):
-    """Convert txt file to datastructure in list format & remove prefix."""
+    """Convert txt file to datastructure in list format & remove prefix"""
     content = getoriginalfilecontent(file)
     data = []
     for line in content:
@@ -248,6 +248,12 @@ def txt2dslistnoprefix(file, prefix):
 def removeEmptyElementsFromList(this_list):
     """Remove empty elements from lists\n
     ex: []"""
-    this_list = [x for x in this_list if x]
+    clean_list = [x for x in this_list if x]
     
-    return this_list
+    return clean_list
+
+def getduplicateElementsFromList(this_list):
+    """Get duplicate elements from lists"""
+    duplicates_from_list = set([x for x in this_list if this_list.count(x) > 1])
+    
+    return duplicates_from_list

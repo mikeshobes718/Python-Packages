@@ -28,11 +28,17 @@ if(filestatus['status'] == 'exist'):
     if(filetype == 'txt'):
         data = universal.txt2dslistnoprefix(raw_dna_file, '#')
         data = universal.removeEmptyElementsFromList(data)
+        rsids = []
         for index in range(len(data)):
             row = (data[index])
-            if(row[0] == 'rsid' or row[0] == 'RSID'):
-                header = (data[index])
-                print(header)
+            # if(row[0] == 'rsid' or row[0] == 'RSID'):
+            #     header = (data[index])
+            #     print(header)
+            rsids.append(row[0])
+        
+        dups = universal.getduplicateElementsFromList(rsids)
+        # dups = set([x for x in rsids if rsids.count(x) > 1])
+        print(dups)
     elif(filetype == 'csv'):
         content = universal.getfilecontent(raw_dna_file)
         print(content)
