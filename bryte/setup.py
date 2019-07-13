@@ -29,7 +29,7 @@ setup(
     ],
     packages=["bryte"],
     include_package_data=True,
-    install_requires=["os", "json", "requests", "subprocess"],
+    install_requires=["os", "sys", "json", "requests", "subprocess"],
     entry_points={
         "console_scripts": [
             "brytepython=bryte.__main__:main",

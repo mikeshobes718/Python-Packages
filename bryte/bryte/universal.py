@@ -5,6 +5,7 @@ universal.py: This module is used for Developmental Engineering purposes.
 """
 
 import os
+import sys
 import json
 import requests
 import subprocess
@@ -172,14 +173,50 @@ def removeprefix(text, prefix):
         return text
     return text
 
-def printfile(file):
+def getoriginalfilecontent(file):
+    """Get entire file contents in original/list format"""
+    with open(file) as f:
+        file_in_list_format = f.readlines()
+
+    return file_in_list_format
+
+def getfilecontent(file):
     """Get entire file contents"""
     with open(file) as f:
-        whole_file = f.readlines()
-    
-    return whole_file
+        file_in_list_format = f.readlines()
+        file_in_list_to_string_format = ''
+        for line in file_in_list_format:
+            file_in_list_to_string_format += line
 
-def printfileline(file, linenumber):
+    return file_in_list_to_string_format
+
+def getoriginalfilecontentnoprefix(file, prefix):
+    """Get entire file contents in original/list format.\n
+    In Development!
+    """
+    with open(file) as f:
+        file_in_list_format = f.readlines()
+        file_in_list_format_no_prefix = []
+        for line in file_in_list_format:
+            # print(line)
+            # line = removeprefix(line[0], prefix)
+            file_in_list_format_no_prefix += line
+
+        # print(file_in_list_format_no_prefix)
+    return file_in_list_format_no_prefix
+
+def getfilecontentnoprefix(file, prefix):
+    """Get entire file contents"""
+    with open(file) as f:
+        file_in_list_format = f.readlines()
+        file_in_list_to_string_format_no_prefix = ''
+        for line in file_in_list_format:
+            line = removeprefix(line, prefix)
+            file_in_list_to_string_format_no_prefix += line
+
+    return file_in_list_to_string_format_no_prefix
+
+def getfileline(file, linenumber):
     """Get specific line from file"""
     with open(file) as f:
         whole_file = f.readlines()
