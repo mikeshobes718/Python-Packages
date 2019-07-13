@@ -25,12 +25,14 @@ raw_dna_file = file_23andMe
 filestatus = (universal.filestatus(raw_dna_file))
 if(filestatus['status'] == 'exist'):
     filetype = (universal.lasttrim('.', raw_dna_file))
-
     if(filetype == 'txt'):
         data = universal.txt2dslistnoprefix(raw_dna_file, '#')
-
-        # print(data)
-        print(data[19][0])
+        data = universal.removeEmptyElementsFromList(data)
+        for index in range(len(data)):
+            row = (data[index])
+            if(row[0] == 'rsid' or row[0] == 'RSID'):
+                header = (data[index])
+                print(header)
     elif(filetype == 'csv'):
         content = universal.getfilecontent(raw_dna_file)
         print(content)

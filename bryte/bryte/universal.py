@@ -244,3 +244,9 @@ def txt2dslistnoprefix(file, prefix):
         data.append(row)
 
     return data
+
+def removeEmptyElementsFromList(this_list):
+    """Remove empty elements from lists"""
+    this_list = [x for x in this_list if x]
+    
+    return this_list
