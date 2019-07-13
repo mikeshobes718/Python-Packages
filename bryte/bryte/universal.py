@@ -223,3 +223,24 @@ def getfileline(file, linenumber):
         line = (whole_file[linenumber])
 
     return line
+
+def txt2dslist(file):
+    """Convert txt file to datastructure in list format."""
+    content = getoriginalfilecontent(file)
+    data = []
+    for line in content:
+        row = line.split()
+        data.append(row)
+
+    return data
+        
+def txt2dslistnoprefix(file, prefix):
+    """Convert txt file to datastructure in list format & remove prefix."""
+    content = getoriginalfilecontent(file)
+    data = []
+    for line in content:
+        line = removeprefix(line, prefix)
+        row = line.split()
+        data.append(row)
+
+    return data

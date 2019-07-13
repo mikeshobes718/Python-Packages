@@ -27,16 +27,10 @@ if(filestatus['status'] == 'exist'):
     filetype = (universal.lasttrim('.', raw_dna_file))
 
     if(filetype == 'txt'):
-        # content = universal.getfilecontent(raw_dna_file)
-        # print(content)
-        # content = universal.getoriginalfilecontent(raw_dna_file)
-        # # print(content)
-        # for line in content:
-        #     line = universal.removeprefix(line, '#')
-        #     print(line)
+        data = universal.txt2dslistnoprefix(raw_dna_file, '#')
 
-        content = universal.getfilecontentnoprefix(raw_dna_file, '#')
-        print(content)
+        # print(data)
+        print(data[19][0])
     elif(filetype == 'csv'):
         content = universal.getfilecontent(raw_dna_file)
         print(content)
