@@ -83,25 +83,25 @@ class UrlRequest:
 # print(env_request.output)
 # print(env_request.json_string)
 
-class file_exist:
-    def __init__(self, this_file):
-        status = os.path.exists(this_file)
-        if(status == True):
-            if(os.path.isdir(this_file)):
-                file_type = 'directory'
-                # print(file_type)
-            elif(os.path.isfile(this_file)):  
-                file_type = 'file'
-                # print(file_type)
-            else:
-                print("It is a special file (socket, FIFO, device file, etc.)" )
-            status = 'exist'
-        else:
-            file_type = status
-            status = status
+# class file_exist:
+#     def __init__(self, this_file):
+#         status = os.path.exists(this_file)
+#         if(status == True):
+#             if(os.path.isdir(this_file)):
+#                 file_type = 'directory'
+#                 # print(file_type)
+#             elif(os.path.isfile(this_file)):  
+#                 file_type = 'file'
+#                 # print(file_type)
+#             else:
+#                 print("It is a special file (socket, FIFO, device file, etc.)" )
+#             status = 'exist'
+#         else:
+#             file_type = status
+#             status = status
 
-        self.file_type = file_type
-        self.status = status
+#         self.file_type = file_type
+#         self.status = status
 
 # binary_file_results = file_exist(terraform_binary_path)
 # state_file_results = file_exist(terraform_state_file_path)
@@ -127,3 +127,62 @@ class file_exist:
 #         print("")
 #             # if(output['data'][counter]['name']) == instance_name:
 #             #     env_id = output['data'][counter]['id']
+
+# Get everything after last character occurrence
+def lasttrim(character, trim_this):
+    """Get all contents after specified character.\n
+    ex: lasttrim('.', string)
+    """
+    trimmed = trim_this[trim_this.rindex(character)+1:]
+
+    return trimmed
+
+class findtrim:
+    """Help for the class findtrim"""
+    def __init__(self):
+        trim_this = 'POS--K    100    100    001    -    1462'
+        trimmed = trim_this[trim_this.rindex('-')+1:]
+
+        self.trimmed = trimmed
+
+def filestatus(this_file):
+    """Check if file exists, and get the file type."""
+    status = os.path.exists(this_file)
+    if(status == True):
+        if(os.path.isdir(this_file)):
+            filetype = 'directory'
+            # print(filetype)
+        elif(os.path.isfile(this_file)):  
+            filetype = 'file'
+            # print(filetype)
+        else:
+            print("It is a special file (socket, FIFO, device file, etc.)" )
+        status = 'exist'
+    else:
+        filetype = status
+        status = status
+    
+    return {'filetype': filetype, 'status': status}
+
+def removeprefix(text, prefix):
+    """Remove a prefix from a string"""
+    if text.startswith(prefix):
+        text = text[len(prefix):] # Removing prefix.
+        text = text.lstrip() # Removing leading white space.
+        return text
+    return text
+
+def printfile(file):
+    """Get entire file contents"""
+    with open(file) as f:
+        whole_file = f.readlines()
+    
+    return whole_file
+
+def printfileline(file, linenumber):
+    """Get specific line from file"""
+    with open(file) as f:
+        whole_file = f.readlines()
+        line = (whole_file[linenumber])
+
+    return line
