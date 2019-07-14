@@ -64,7 +64,28 @@ if(filestatus['status'] == 'exist'):
             line_number = index + 1
             rsids.append(data_without_notes_and_header[0])
             # print(str(line_number) + ": " + str(data_without_notes_and_header[index]))
-            print(str(line_number) + ": " + ' -- '.join(data_without_notes_and_header[index]))
+            # print(str(line_number) + ": " + ' -- '.join(data_without_notes_and_header[index]))
+
+        def columnGenerator():
+            all_columns = []
+            for column in header:
+                this_column = []
+                # print(column)
+                column = header.index(column)
+                for index in range(len(data_without_notes_and_header)):
+                    this_column.append(data_without_notes_and_header[index][column])
+                    # print(data_without_notes_and_header[index][column])
+                    # this_column.append(data_without_notes_and_header[0])
+                all_columns.append(this_column)
+                # sys.exit()
+
+            return all_columns
+
+        all_columns = columnGenerator()
+
+        # header = 'rsid'
+        column_index = header.index('chromosome')
+        print(all_columns[column_index])
 
         # dups = universal.getduplicateElementsFromList(rsids)
         # dups = set([x for x in rsids if rsids.count(x) > 1])
