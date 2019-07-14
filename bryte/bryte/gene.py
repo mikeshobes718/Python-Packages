@@ -6,6 +6,7 @@ gene.py: This module is used for Developmental Engineering purposes.
 
 import os
 import sys
+import time
 import universal
 
 file_23andMe = "/Users/mike/Documents/Life/Business/GeneDyve/Orders/New/genome_Solange_Dorsinville_v5_Full_20190211213037 2.txt"
@@ -14,6 +15,7 @@ file_MyHeritage = "/Users/mike/Documents/Life/Business/Ancestry31/Orders/Pending
 raw_dna_file = file_23andMe 
 
 print("STATUS: Running...")
+start = time.time()
 
 filestatus = (universal.filestatus(raw_dna_file))
 if(filestatus['status'] == 'exist'):
@@ -91,17 +93,28 @@ if(filestatus['status'] == 'exist'):
         
         # column('rsid')
 
-        for column in header:
-            print("STATUS: Checking for \"" + column + "\" duplicates")
-            column_index = header.index(column)
-            # print(all_columns[column_index])
-            # print('\n'.join(all_columns[column_index]))
-            duplicates = universal.getduplicateElementsFromList(all_columns[column_index])
-        # dups = set([x for x in rsids if rsids.count(x) > 1])
-        # print(dups)
+        def checkForDuplicates():
+            for column in header:
+                print("STATUS: Checking for \"" + column + "\" duplicates")
+                column_index = header.index(column)
+                # print(all_columns[column_index])
+                # print('\n'.join(all_columns[column_index]))
+                duplicates = universal.getduplicateElementsFromList(all_columns[column_index])
+                # dups = set([x for x in rsids if rsids.count(x) > 1])
+                print(duplicates)
+                mid = time.time()
+                print("INFO: Time elapsed: " + str(mid - start) + "\n")
+
+        # checkForDuplicates()
+
     elif(filetype == 'csv'):
         content = universal.getfilecontent(raw_dna_file)
         print(content)
 else:
     print(("ERROR: File \"{}\" doesn't exist!").format(raw_dna_file))
     sys.exit()
+
+
+end = time.time()
+print("INFO: Total run time " + str(end - start))
+print("STATUS: Done!")
