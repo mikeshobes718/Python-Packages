@@ -28,7 +28,7 @@ if(filestatus['status'] == 'exist'):
     if(filetype == 'txt'):
         data = universal.txt2dslistnoprefix(raw_dna_file, '#')
         data = universal.removeEmptyElementsFromList(data)
-        print("INFO: The length of data structure is \"" + str(len(data)) + "\"") 
+        # print("INFO: The length of data structure is \"" + str(len(data)) + "\"") 
         header = None # Header row data
         header_index = None # Header row index
         for index in range(len(data)):
@@ -46,10 +46,10 @@ if(filestatus['status'] == 'exist'):
         #     counter += 1
 
         # Removing raw dna file notes
-        data_without_notes = []
-        for index in range(len(data)):
-            if(index >= header_index):
-                data_without_notes.append(data[index])
+        # data_without_notes = []
+        # for index in range(len(data)):
+        #     if(index >= header_index):
+        #         data_without_notes.append(data[index])
 
         # Removing raw dna file notes and header
         data_without_notes_and_header = []
@@ -57,13 +57,14 @@ if(filestatus['status'] == 'exist'):
             if(index > header_index):
                 data_without_notes_and_header.append(data[index])
 
-        print("INFO: The length of data structure is \"" + str(len(data_without_notes_and_header)) + "\"") 
+        # print("INFO: The length of data structure is \"" + str(len(data_without_notes_and_header)) + "\"") 
 
-        # rsids = []
-        # for index in range(len(data)):
-        #     rsids.append(row[1])
-        # print(data[3])
-        # print(' '.join(data[0]))
+        rsids = []
+        for index in range(len(data_without_notes_and_header)):
+            line_number = index + 1
+            rsids.append(data_without_notes_and_header[0])
+            # print(str(line_number) + ": " + str(data_without_notes_and_header[index]))
+            print(str(line_number) + ": " + ' -- '.join(data_without_notes_and_header[index]))
 
         # dups = universal.getduplicateElementsFromList(rsids)
         # dups = set([x for x in rsids if rsids.count(x) > 1])
