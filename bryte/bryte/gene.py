@@ -93,7 +93,8 @@ if(filestatus['status'] == 'exist'):
         # Print specific column
         def column(this_column):
             column_index = header.index(this_column)
-            print(all_columns[column_index])
+            for row in all_columns[column_index]:
+                print(row)
         
         # column('rsid')
 
