@@ -6,21 +6,14 @@ gene.py: This module is used for Developmental Engineering purposes.
 
 import os
 import sys
-import json
-import requests
-import subprocess
 import universal
-
-weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat']
-
-whoami = "Mike Shobes"
-
-headers = {'Content-type':'application/json'}
 
 file_23andMe = "/Users/mike/Documents/Life/Business/GeneDyve/Orders/New/genome_Solange_Dorsinville_v5_Full_20190211213037 2.txt"
 file_MyHeritage = "/Users/mike/Documents/Life/Business/Ancestry31/Orders/Pending/MyHeritage_raw_dna_data.csv"
 
 raw_dna_file = file_23andMe 
+
+print("STATUS: Running...")
 
 filestatus = (universal.filestatus(raw_dna_file))
 if(filestatus['status'] == 'exist'):
@@ -99,11 +92,11 @@ if(filestatus['status'] == 'exist'):
         # column('rsid')
 
         for column in header:
+            print("STATUS: Checking for \"" + column + "\" duplicates")
             column_index = header.index(column)
-            # print(column_index)
             # print(all_columns[column_index])
-
-        # dups = universal.getduplicateElementsFromList(rsids)
+            # print('\n'.join(all_columns[column_index]))
+            duplicates = universal.getduplicateElementsFromList(all_columns[column_index])
         # dups = set([x for x in rsids if rsids.count(x) > 1])
         # print(dups)
     elif(filetype == 'csv'):
