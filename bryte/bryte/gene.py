@@ -83,9 +83,24 @@ if(filestatus['status'] == 'exist'):
 
         all_columns = columnGenerator()
 
-        # header = 'rsid'
-        column_index = header.index('chromosome')
-        print(all_columns[column_index])
+        # Print column names
+        def columnnames():
+            for column in header:
+                print(column)
+
+        # columnnames()
+
+        # Print specific column
+        def column(this_column):
+            column_index = header.index(this_column)
+            print(all_columns[column_index])
+        
+        # column('rsid')
+
+        for column in header:
+            column_index = header.index(column)
+            # print(column_index)
+            # print(all_columns[column_index])
 
         # dups = universal.getduplicateElementsFromList(rsids)
         # dups = set([x for x in rsids if rsids.count(x) > 1])
