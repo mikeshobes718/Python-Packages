@@ -28,17 +28,42 @@ if(filestatus['status'] == 'exist'):
     if(filetype == 'txt'):
         data = universal.txt2dslistnoprefix(raw_dna_file, '#')
         data = universal.removeEmptyElementsFromList(data)
-        rsids = []
+        print("INFO: The length of data structure is \"" + str(len(data)) + "\"") 
+        header = None # Header row data
+        header_index = None # Header row index
         for index in range(len(data)):
+            line_number = index + 1
             row = (data[index])
-            # if(row[0] == 'rsid' or row[0] == 'RSID'):
-            #     header = (data[index])
-            #     print(header)
-            rsids.append(row[0])
+            if(row[0] == 'rsid' or row[0] == 'RSID'):
+                header = (data[index])
+                header_index = index
+                break
         
-        dups = universal.getduplicateElementsFromList(rsids)
+        # Print notes raw dna file
+        # counter = 0
+        # while counter < header_index:
+        #     print(' '.join(data[counter]))
+        #     counter += 1
+
+        # Removing notes raw dna file
+        counter = 0
+        data_without_notes_and_header = []
+        for row in data:
+            if(counter > header_index):
+                data_without_notes_and_header.append(data[counter])
+            counter += 1
+
+        print("INFO: The length of data structure is \"" + str(len(data_without_notes_and_header)) + "\"") 
+
+        # rsids = []
+        # for index in range(len(data)):
+        #     rsids.append(row[1])
+        # print(data[3])
+        # print(' '.join(data[0]))
+
+        # dups = universal.getduplicateElementsFromList(rsids)
         # dups = set([x for x in rsids if rsids.count(x) > 1])
-        print(dups)
+        # print(dups)
     elif(filetype == 'csv'):
         content = universal.getfilecontent(raw_dna_file)
         print(content)
