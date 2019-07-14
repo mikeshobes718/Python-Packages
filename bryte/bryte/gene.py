@@ -39,19 +39,23 @@ if(filestatus['status'] == 'exist'):
                 header_index = index
                 break
         
-        # Print notes raw dna file
+        # Print raw dna file notes
         # counter = 0
         # while counter < header_index:
         #     print(' '.join(data[counter]))
         #     counter += 1
 
-        # Removing notes raw dna file
-        counter = 0
+        # Removing raw dna file notes
+        data_without_notes = []
+        for index in range(len(data)):
+            if(index >= header_index):
+                data_without_notes.append(data[index])
+
+        # Removing raw dna file notes and header
         data_without_notes_and_header = []
-        for row in data:
-            if(counter > header_index):
-                data_without_notes_and_header.append(data[counter])
-            counter += 1
+        for index in range(len(data)):
+            if(index > header_index):
+                data_without_notes_and_header.append(data[index])
 
         print("INFO: The length of data structure is \"" + str(len(data_without_notes_and_header)) + "\"") 
 
