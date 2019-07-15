@@ -10,17 +10,14 @@ import json
 import requests
 import subprocess
 
-weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat']
-
-whoami = "Mike Shobes"
-
 headers = {'Content-type':'application/json'}
 
 # USE IN OTHER PROGRAMS TO DOWNLOAD MODULE
-# module_file_name = "temp.py"
-# module_url = "ENTER GIT RAW URL LINK HERE"
-# proc_output = subprocess.Popen(["wget", "-o", "/dev/null", "-O", module_file_name, module_url], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-# out, err = proc_output.communicate()
+def downloadfile(this_file, url):
+    proc_output = subprocess.Popen(["wget", "-o", "/dev/null", "-O", this_file, url], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = proc_output.communicate()
+
+    return out, err
 
 # USE IN OTHER PROGRAMS TO INSTALL MODULE
 # module_name = module_file_name
@@ -58,12 +55,6 @@ values = get_env_creds('Test')
 env_url = values[0]
 key = values[1]
 secret = values[2]
-
-def get():
-    print("BTMOS")
-
-def printer(msg):
-    print(msg)
 
 class UrlRequest:
     def __init__(self, url, key, secret):
@@ -137,14 +128,6 @@ def lasttrim(character, trim_this):
     trimmed = trim_this[trim_this.rindex(character)+1:]
 
     return trimmed
-
-class findtrim:
-    """Help for the class findtrim"""
-    def __init__(self):
-        trim_this = 'POS--K    100    100    001    -    1462'
-        trimmed = trim_this[trim_this.rindex('-')+1:]
-
-        self.trimmed = trimmed
 
 def filestatus(this_file):
     """Check if file exists, and get the file type"""

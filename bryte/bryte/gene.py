@@ -1,3 +1,5 @@
+#!/user/bin/env python3
+
 # gene.py
 
 """
@@ -8,6 +10,7 @@ import os
 import sys
 import time
 import universal
+from multiprocessing import Process
 
 file_23andMe = "/Users/mike/Documents/Life/Business/GeneDyve/Orders/New/genome_Solange_Dorsinville_v5_Full_20190211213037 2.txt"
 file_MyHeritage = "/Users/mike/Documents/Life/Business/Ancestry31/Orders/Pending/MyHeritage_raw_dna_data.csv"
@@ -99,13 +102,45 @@ if(filestatus['status'] == 'exist'):
                 column_index = header.index(column)
                 # print(all_columns[column_index])
                 # print('\n'.join(all_columns[column_index]))
-                duplicates = universal.getduplicateElementsFromList(all_columns[column_index])
-                # dups = set([x for x in rsids if rsids.count(x) > 1])
-                print(duplicates)
+                def checker():
+                    # duplicates = universal.getduplicateElementsFromList(all_columns[column_index])
+                    # print(duplicates)
+                    duplicates = []
+                    for index in all_columns[column_index]:
+                        if(all_columns[column_index].count(index) > 1):
+                            if index not in duplicates:
+                                duplicates.append(index)
+                                # print(index)
+                
+                    print(duplicates)
+                    
+                checker()
+
+                runCheck = Process(target=checker)
+                runCheck.start()
+                runCheck.join()
+
+
                 mid = time.time()
                 print("INFO: Time elapsed: " + str(mid - start) + "\n")
 
-        # checkForDuplicates()
+        checkForDuplicates()
+
+        # def info(title):
+        #     print(title)
+        #     print('module name:', __name__)
+        #     if hasattr(os, 'getppid'):  # only available on Unix
+        #         print('parent process:', os.getppid())
+        #     print('process id:', os.getpid())
+
+        # def f(name):
+        #     info('function f')
+        #     print('hello', name)
+
+        #     info('main line')
+        #     p = Process(target=f, args=('bob',))
+        #     p.start()
+        #     p.join()
 
     elif(filetype == 'csv'):
         content = universal.getfilecontent(raw_dna_file)
